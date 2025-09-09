@@ -200,7 +200,8 @@ CREATE TABLE public.void (
     size integer,
     rotating boolean DEFAULT false NOT NULL,
     temperature numeric DEFAULT 2.4 NOT NULL,
-    isotropic boolean DEFAULT false NOT NULL
+    isotropic boolean DEFAULT false NOT NULL,
+    name character varying(255) NOT NULL
 );
 
 
@@ -340,6 +341,9 @@ INSERT INTO public.star VALUES (6, 6, 6, 'star6', 6);
 -- Data for Name: void; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.void VALUES (1, 1, false, 2.4, false, 'Void1');
+INSERT INTO public.void VALUES (2, 2, false, 2.4, false, 'Void2');
+INSERT INTO public.void VALUES (3, 3, false, 2.4, false, 'Void3');
 
 
 --
@@ -374,7 +378,7 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
 -- Name: void_void_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.void_void_id_seq', 1, false);
+SELECT pg_catalog.setval('public.void_void_id_seq', 3, true);
 
 
 --
@@ -402,6 +406,38 @@ ALTER TABLE ONLY public.moon
 
 
 --
+-- Name: galaxy name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT name_unique UNIQUE (name);
+
+
+--
+-- Name: star name_unique_planet; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT name_unique_planet UNIQUE (name);
+
+
+--
+-- Name: planet name_unique_planet2; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT name_unique_planet2 UNIQUE (name);
+
+
+--
+-- Name: star name_unique_star; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT name_unique_star UNIQUE (name);
+
+
+--
 -- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -415,6 +451,14 @@ ALTER TABLE ONLY public.planet
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_pkey PRIMARY KEY (star_id);
+
+
+--
+-- Name: void void_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.void
+    ADD CONSTRAINT void_name_key UNIQUE (name);
 
 
 --
